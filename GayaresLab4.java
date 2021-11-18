@@ -7,23 +7,18 @@ public class GayaresLab4 {
 	public static int TypeNumberJob = 0;
 	//0 = Jobs  1 = ARRIVAL TIME 2 = BURST TIME
 	public static int Jobs[][] = new int[10][3], waitingTime[] = new int[20], patternNumber = 0,  	
-	 completionTime = 0, Gannt = 0, statnumber = 0;
+	 completionTime = 0, Gannt = 0, statnumber = 0,  ctrl =0;
 	public static int GanntChart[] = new int[20];  
 	public static String patternText;	
 
 	public static void main(String[] args) {
-		GanntChart[4] = 5;
-		GanntChart[1] = 5;	
+	
 		
 		System.out.print("ENTER NUMBER OF JOBS (MAXIMUM OF 10): ");
 		TypeNumberJob = sc.nextInt();	
 	
 		numberJobs(TypeNumberJob);
-
-				
-					output();
-					
-					
+		output();								
 	}
 
 	static void numberJobs(int NumberJob) {
@@ -55,7 +50,7 @@ public class GayaresLab4 {
 	
 	static void output() {
 		
-		int tempJobs=0, TempArrivalTime = 0, tempBurstTime=0;
+		int tempJobs=0, TempArrivalTime = 0, tempBurstTime=0, idlecounting = 0;
 		
 				for(int sort=0;	sort<TypeNumberJob-1;	sort++) {		
 					for (int sort2=0;	sort2<TypeNumberJob-1; sort2++) {
@@ -75,10 +70,7 @@ public class GayaresLab4 {
 						}
 					}
 				}	
-		
-		
-		
-		
+							
 		//for testing
 		System.out.println("\nOUTPUT: ");
 		for(int x=0; x<TypeNumberJob; x++) {
@@ -94,29 +86,221 @@ public class GayaresLab4 {
 		
 		
 		//GantChart
+		int idle = 0;
 		
-		
-		if(Jobs[0][1] == 0) {
-		
+		if(Jobs[0][1] == 0) {		
 			completionTime += Jobs[0][2];
-			GanntChart[0] = Jobs[0][0];
-			statnumber = 1;
-			ghanchart();
-			
+			GanntChart[ctrl] = Jobs[0][0];
+			//statnumber = 1;	
 		}else if (Jobs[0][1] > 0) {
+			GanntChart[ctrl] = 11;
+			int sum = Jobs[0][1] + Jobs[0][2]; 
+			completionTime += sum ;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[0][0];
+			//statnumber = 0;	
+		}
+		
+		ctrl++;
+		
+		if(Jobs[1][1] <= completionTime) {
+			completionTime += Jobs[1][2];
+			GanntChart[ctrl] = Jobs[1][0];
 			
-			GanntChart[0] = 11;
-			completionTime += Jobs[0][1];
-			statnumber = 0;
-			ghanchart();
+		} else if (Jobs[1][1] > completionTime) {
+			idle = Jobs[1][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[1][0];
+			
+			completionTime += Jobs[1][2];
 			
 		}
 		
+		ctrl++;
 		
-				
+		
+		if(Jobs[2][1] <= completionTime) {
+			completionTime += Jobs[2][2];
+			GanntChart[ctrl] = Jobs[2][0];
+			
+		} else if (Jobs[2][1] > completionTime) {
+			idle = Jobs[2][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[2][0];
+			
+			completionTime += Jobs[2][2];
+		}
+		
+		ctrl++;
+		
+		
+		
+		if(Jobs[3][1] <= completionTime) {
+			completionTime += Jobs[3][2];
+			GanntChart[ctrl] = Jobs[3][0];
+			
+		} else if (Jobs[3][1] > completionTime) {
+			idle = Jobs[3][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[3][0];
+			
+			completionTime += Jobs[3][2];
+		}
+		
+		ctrl++;
+		
+		
+		
+		
+		if(Jobs[4][1] <= completionTime) {
+			completionTime += Jobs[4][2];
+			GanntChart[ctrl] = Jobs[4][0];
+			
+		} else if (Jobs[4][1] > completionTime) {
+			idle = Jobs[4][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[4][0];
+			
+			completionTime += Jobs[4][2];
+		}
+		
+		ctrl++;
+		
+		
+		if(Jobs[5][1] <= completionTime) {
+			completionTime += Jobs[5][2];
+			GanntChart[ctrl] = Jobs[5][0];
+			
+		} else if (Jobs[5][1] > completionTime) {
+			idle = Jobs[5][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[5][0];
+			
+			completionTime += Jobs[5][2];
+		}
+		
+		ctrl++;
+		
+		
+		
+		if(Jobs[6][1] <= completionTime) {
+			completionTime += Jobs[6][2];
+			GanntChart[ctrl] = Jobs[6][0];
+			
+		} else if (Jobs[6][1] > completionTime) {
+			idle = Jobs[6][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[6][0];
+			
+			completionTime += Jobs[6][2];
+		}
+		
+		ctrl++;
+		
+		
+		if(Jobs[7][1] <= completionTime) {
+			completionTime += Jobs[7][2];
+			GanntChart[ctrl] = Jobs[7][0];
+			
+		} else if (Jobs[7][1] > completionTime) {
+			idle = Jobs[7][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[7][0];
+			
+			completionTime += Jobs[7][2];
+		}
+		
+		ctrl++;
+		
+		
+		if(Jobs[8][1] <= completionTime) {
+			completionTime += Jobs[8][2];
+			GanntChart[ctrl] = Jobs[8][0];
+			
+		} else if (Jobs[8][1] > completionTime) {
+			idle = Jobs[8][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			
+			GanntChart[ctrl] = Jobs[8][0];
+			
+			completionTime += Jobs[8][2];
+		}
+		
+		ctrl++;
+		
+		
+		if(Jobs[9][1] <= completionTime) {
+			completionTime += Jobs[9][2];
+			GanntChart[ctrl] = Jobs[9][0];
+			
+		} else if (Jobs[9][1] > completionTime) {
+			idle = Jobs[9][1] - completionTime;
+			
+			completionTime += idle;
+			
+			GanntChart[ctrl] = 11;
+			ctrl++;
+			idlecounting++;
+			GanntChart[ctrl] = Jobs[9][0];
+			
+			completionTime += Jobs[9][2];
+		}
+		
+		ctrl++;
+		
+		
+		
+		
+		
+						
 		//printing gantcharts
-		System.out.println(" GANTT CHART ");
-		for(int xss=0; xss<GanntChart.length; xss++) {
+		
+		
+		int thingkingNumber = TypeNumberJob + idlecounting;
+		
+		System.out.println("GANTT CHART ");
+		for(int xss=0; xss< thingkingNumber ; xss++) {
 			patternNumber = GanntChart[xss];
 			 patternConversion();
 			System.out.print(patternText + " " );
@@ -134,32 +318,32 @@ public class GayaresLab4 {
 								//		}		
 	 }
 	
-		static void ghanchart() {
-		
-			for(int thirdy=statnumber; thirdy<9; thirdy++) {
-				
-				if(Jobs[thirdy][1] <= completionTime) {
-					
-					completionTime += Jobs[thirdy][2];
-					if (statnumber == 0) {
-					GanntChart[thirdy+1] = Jobs[thirdy][0];
-					}else if(statnumber == 1) {
-						GanntChart[thirdy] = Jobs[thirdy][0];
-					}
-				}else if (Jobs[thirdy][1] > completionTime) {					
-					   
-					GanntChart[thirdy] = 11;
-					GanntChart[thirdy+1] = Jobs[thirdy][1];
-					
-					int idle = 0;
-						idle = Jobs[thirdy][1] - idle;
-					completionTime += idle;
-										
-				}
-				
-			}
-				
-		}
+//		static void ghanchart() {
+//		
+//			for(int thirdy=statnumber; thirdy<9; thirdy++) {
+//				
+//				if(Jobs[thirdy][1] <= completionTime) {
+//					
+//					completionTime += Jobs[thirdy][2];
+//					if (statnumber == 0) {
+//					GanntChart[thirdy+1] = Jobs[thirdy][0];
+//					}else if(statnumber == 1) {
+//						GanntChart[thirdy] = Jobs[thirdy][0];
+//					}
+//				}else if (Jobs[thirdy][1] > completionTime) {					
+//					   
+//					GanntChart[thirdy] = 11;
+//					GanntChart[thirdy+1] = Jobs[thirdy][1];
+//					
+//					int idle = 0;
+//						idle = Jobs[thirdy][1] - idle;
+//					completionTime += idle;
+//										
+//				}
+//				
+//			}
+//				
+//		}
 		
 		 
 		
